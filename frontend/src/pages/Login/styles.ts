@@ -2,18 +2,11 @@ import { styled } from "styled-components";
 
 export const LoginContainer = styled.div`
     display: flex;
-    background-color: ${({ theme }) => theme.colors.white};
+    background: ${({ theme }) => theme.colors.background};
     height: 100vh;
     width: 100vw;
     align-items: center;
     justify-content: center;
-    img.background{
-        height: 90%;
-        width: 100%;
-        position: absolute;
-        z-index: 0;
-        top: 10%;
-    }
     div.login-content{
         z-index: 1;
         align-items: center;
@@ -22,6 +15,21 @@ export const LoginContainer = styled.div`
         flex-direction: column;
         gap: 40px;
         width: 100%;
+        padding: 0 16px;
+        div.intro{
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            width: 100%;
+            span.intro-title{
+                font-family: ${({ theme }) => theme.fontFamily.default};
+                color: ${({ theme }) => theme.colors.black};
+            }
+            span.intro-subtitle{
+                font-family: ${({ theme }) => theme.fontFamily.default};
+                color: ${({ theme }) => theme.colors.black};
+            }
+        }
         img.logo{
             height: 50px;
             width: auto;

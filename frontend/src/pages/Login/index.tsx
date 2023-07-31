@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { LoginContainer } from "./styles";
 import { useAuth } from "contexts/auth.context";
-import { ByCapitel } from "components/ByCapitel/ByCapitel";
 
 export const Login = () => {
     const [username, setUsername] = useState("");
@@ -28,9 +27,11 @@ export const Login = () => {
     };
     return (
         <LoginContainer>
-            <img className="background" src="imgs/background.png" alt="Background Login" />
             <div className="login-content">
-                <img className="logo" src="imgs/hacktown.png" alt="Hacktown Logo" />
+                <div className="intro">
+                    <span className="intro-title">Bem vindx! 👋</span>
+                    <span className="intro-subtitle">Sentimos a sua falta!</span>
+                </div>
                 <form onSubmit={handleSubmit}>
                     <div className={`form-group ${error ? 'error': ''}`}>
                         <label htmlFor="username">E-mail</label>
@@ -64,13 +65,25 @@ export const Login = () => {
                             </div>
                         )}
                     </div>
+                    <div>
+                        <div>
+                            <input type="checkbox" id="remember" />
+                            <label htmlFor="remember">Lembrar-me</label>
+                        </div>
+                        <div>
+                            <a href="forgot-pwd">Esqueci minha senha</a>
+                        </div>
+                    </div>
                     <button type="submit" className="btn">
                         Entrar
                         {loading && (
                             <img src="imgs/spinner.webp" />)}
                     </button>
+                    <div className="sign-up">
+                        <span>Não tem uma conta?</span>
+                        <a href="sign-up">Cadastre-se</a>
+                    </div>
                 </form>
-                <ByCapitel theme="dark" />
             </div>
         </LoginContainer>
     );

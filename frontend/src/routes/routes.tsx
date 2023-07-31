@@ -17,12 +17,12 @@ export const Router = () => {
         return (
             <Suspense fallback={<LoadingPage />}>
                 <Routes>
+                    <Route path="*" element={<Login />} />
                     <Route path="login" element={<Login />} />
                     <Route path="signup" element={<SignUp />} />
                     <Route path="forgot-pwd" element={<ForgotPwd />} />
 
                     <Route path="404" element={<NotFound />} />
-                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </Suspense>
         )

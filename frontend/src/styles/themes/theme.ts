@@ -1,15 +1,6 @@
 export const theme = {
     colors: {
-        red: "#F8105F",
-        darkRed: "#A10C3F",
-        pink: "#FE457E",
-        darkPink: "#F400A9",
-        yellow: "#FFCA05",
-        darkYellow: "#C9A10E",
-        blue: "#582482",
-        darkBlue: "rgba(29, 25, 51, 1)",
-        green: "#22EED9",
-        darkGreen: "#3ED1C8",
+        background: "#F2FFFF",
         white: "#FFFFFF",
         black: "#000000",
     },
@@ -20,6 +11,7 @@ export const theme = {
         paragraph: "16px; font-weight: 400;",
     },
     fontFamily: {
-        default: "Barlow",
+        default: "Manrope",
+        alternative: "Nunito"
     }
 }
