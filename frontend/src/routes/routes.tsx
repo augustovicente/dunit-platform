@@ -4,9 +4,11 @@ import { Route, Routes } from 'react-router-dom';
 import { NotFound } from '../pages/NotFound';
 import { LoadingPage } from 'pages/LoadingPage';
 
-const QRCode = lazy(() => import('pages/QRCodeScan').then((module) => ({ default: module.QRCodeScan })));
+const ForgotPwd = lazy(() => import('pages/ForgotPwd').then((module) => ({ default: module.ForgotPwd })));
 const Login = lazy(() => import('pages/Login').then((module) => ({ default: module.Login })));
-const NFT = lazy(() => import('pages/NFT').then((module) => ({ default: module.NFT })));
+const SignUp = lazy(() => import('pages/SignUp').then((module) => ({ default: module.SignUp })));
+const FillInformation = lazy(() => import('pages/FillInformation').then((module) => ({ default: module.FillInformation })));
+const Home = lazy(() => import('pages/Home').then((module) => ({ default: module.Home })));
 
 export const Router = () => {
     const { user } = useAuth();
@@ -16,9 +18,10 @@ export const Router = () => {
             <Suspense fallback={<LoadingPage />}>
                 <Routes>
                     <Route path="login" element={<Login />} />
-                    <Route path="/nft/:nft_id" element={<NFT />} />
-                    <Route path="404" element={<NotFound />} />
+                    <Route path="signup" element={<SignUp />} />
+                    <Route path="forgot-pwd" element={<ForgotPwd />} />
 
+                    <Route path="404" element={<NotFound />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </Suspense>
@@ -28,8 +31,9 @@ export const Router = () => {
     return (
         <Suspense fallback={<LoadingPage />}>
             <Routes>
-                <Route path='/' element={<QRCode />} />
                 <Route path="*" element={<NotFound />} />
+                <Route path="fill-information" element={<FillInformation />} />
+                <Route path="home" element={<Home />} />
             </Routes>
         </Suspense>
     )
