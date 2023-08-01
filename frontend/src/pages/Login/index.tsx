@@ -65,14 +65,10 @@ export const Login = () => {
                             </div>
                         )}
                     </div>
-                    <div>
-                        <div>
-                            <input type="checkbox" id="remember" />
-                            <label htmlFor="remember">Lembrar-me</label>
-                        </div>
-                        <div>
-                            <a href="forgot-pwd">Esqueci minha senha</a>
-                        </div>
+                    <div className="login-options">
+                        <input type="checkbox" id="remember" />
+                        <label htmlFor="remember">Lembrar de mim</label>
+                        <a href="forgot-pwd">Esqueci minha senha</a>
                     </div>
                     <button type="submit" className="btn">
                         Entrar
