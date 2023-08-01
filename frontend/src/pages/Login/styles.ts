@@ -80,12 +80,12 @@ export const LoginContainer = styled.div`
                 }
                 div.alert-danger{
                     font-family: ${({ theme }) => theme.fontFamily.default};
-                    color: ${({ theme }) => theme.colors.yellow};
-                    font-size: ${({ theme }) => theme.fontSizes.paragraph};
+                    color: ${({ theme }) => theme.colors.red};
+                    font-size: ${({ theme }) => theme.fontSizes.normal};
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    padding-top: 10px;
+                    padding: 10px;
                     width: 100%;
                 }
                 &.error{
@@ -123,6 +123,7 @@ export const LoginContainer = styled.div`
                 flex-direction: row;
                 align-items: center;
                 justify-content: center;
+                gap: 10px;
                 img{
                     height: 20px;
                     width: auto;

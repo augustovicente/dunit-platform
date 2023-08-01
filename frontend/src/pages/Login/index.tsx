@@ -25,6 +25,7 @@ export const Login = () => {
             return;
         }
     };
+
     return (
         <LoginContainer>
             <div className="login-content">
@@ -66,8 +67,6 @@ export const Login = () => {
                         )}
                     </div>
                     <div className="login-options">
-                        <input type="checkbox" id="remember" />
-                        <label htmlFor="remember">Lembrar de mim</label>
                         <a href="forgot-pwd">Esqueci minha senha</a>
                     </div>
                     <button type="submit" className="btn">
