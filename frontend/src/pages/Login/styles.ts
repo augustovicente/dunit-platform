@@ -7,6 +7,12 @@ export const LoginContainer = styled.div`
     width: 100vw;
     align-items: center;
     justify-content: center;
+    img {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
     div.login-content{
         z-index: 1;
         align-items: center;

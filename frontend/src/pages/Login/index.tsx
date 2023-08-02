@@ -28,6 +28,7 @@ export const Login = () => {
 
     return (
         <LoginContainer>
+            <img src="imgs/dunit.png" alt="" />
             <div className="login-content">
                 <div className="intro">
                     <span className="intro-title">Bem vindx! 👋</span>
@@ -76,7 +77,7 @@ export const Login = () => {
                     </button>
                     <div className="sign-up">
                         <span>Não tem uma conta?</span>
-                        <a href="sign-up">Cadastre-se</a>
+                        <a href="signup">Cadastre-se</a>
                     </div>
                 </form>
             </div>

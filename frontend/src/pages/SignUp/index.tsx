@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { LoginContainer } from "./styles";
+import { SignupContainer } from "./styles";
 import { useAuth } from "contexts/auth.context";
-import { ByCapitel } from "components/ByCapitel/ByCapitel";
 
 export const SignUp = () => {
     const [username, setUsername] = useState("");
+    const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -26,11 +26,15 @@ export const SignUp = () => {
             return;
         }
     };
+
     return (
-        <LoginContainer>
-            <img className="background" src="imgs/background.png" alt="Background Login" />
+        <SignupContainer>
+            <img src="imgs/dunit.png" alt="" />
             <div className="login-content">
-                <img className="logo" src="imgs/hacktown.png" alt="Hacktown Logo" />
+                <div className="intro">
+                    <span className="intro-title">Crie sua conta</span>
+                    <span className="intro-subtitle">Conecte com empresa e investidores hoje!</span>
+                </div>
                 <form onSubmit={handleSubmit}>
                     <div className={`form-group ${error ? 'error': ''}`}>
                         <label htmlFor="username">E-mail</label>
@@ -41,6 +45,18 @@ export const SignUp = () => {
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                         />
+                    </div>
+                    <div className={`form-group ${error ? 'error': ''}`}>
+                        <label htmlFor="phone">Telefone</label>
+                        <div className="form-control">
+                            <span>+55</span>
+                            <input
+                                type="number"
+                                id="phone"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                            />
+                        </div>
                     </div>
                     <div className={`form-group ${error ? 'error': ''}`}>
                         <label htmlFor="password">Senha</label>
@@ -65,13 +81,16 @@ export const SignUp = () => {
                         )}
                     </div>
                     <button type="submit" className="btn">
-                        Entrar
+                        Cadastrar
                         {loading && (
                             <img src="imgs/spinner.webp" />)}
                     </button>
+                    <div className="login">
+                        <span>Já tem uma conta?</span>
+                        <a href="login">Login</a>
+                    </div>
                 </form>
-                <ByCapitel theme="dark" />
             </div>
-        </LoginContainer>
+        </SignupContainer>
     );
 }
