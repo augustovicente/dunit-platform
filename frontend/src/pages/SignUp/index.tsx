@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { SignupContainer } from "./styles";
 import { api } from "services/api";
+import { PREFIX_AUTH } from "utils/constants";
+import { useAuth } from "contexts/auth.context";
+import { useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
     const [username, setUsername] = useState("");
@@ -9,6 +12,8 @@ export const SignUp = () => {
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
     const [seePwd, setSeePwd] = useState(false);
+    const navigate = useNavigate();
+    const { triggerUpdate } = useAuth();
     
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         setLoading(true);
@@ -22,11 +27,24 @@ export const SignUp = () => {
         }
         
         // create user
-        const response = await api.post("/signup", {
+        const {data: response}: any = await api.post("/signup", {
             username,
             phone,
             password
+        })
+        .catch((err) => {
+            console.error("Error on signup", err);
+            return;
         });
+    
+        console.log("Response", response.token, response.user);
+        localStorage.setItem(`${PREFIX_AUTH}:token`, JSON.stringify(response.token))
+        localStorage.setItem(`${PREFIX_AUTH}:user`, JSON.stringify(response.user))
+
+        setLoading(false);
+        triggerUpdate();
+        navigate('/fill-information', { replace: true });
+
     };
 
     return (

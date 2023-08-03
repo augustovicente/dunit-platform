@@ -33,6 +33,7 @@ export type AuthContextData = {
     signIn(credentials: SignInCredentials): Promise<any>;
     signOut(): void;
     resetUser(): void;
+    triggerUpdate(): void;
 };
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -44,7 +45,12 @@ export const AuthProvider = ({ children }: PropsProvider) => {
     });
 
     const [loading, setLoading] = useToggle(false);
+    const [trigger, setTrigger] = useState(0);
     const navigate = useNavigate();
+
+    const triggerUpdate = () => {
+        setTrigger(Math.random());
+    };
 
     useEffect(() => {
         const token = localStorage.getItem(`${PREFIX_AUTH}:token`)
@@ -56,7 +62,7 @@ export const AuthProvider = ({ children }: PropsProvider) => {
                 token: JSON.parse(token),
             });
         }
-    }, []);
+    }, [trigger]);
 
     const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
         setLoading(true);
@@ -124,6 +130,7 @@ export const AuthProvider = ({ children }: PropsProvider) => {
                 signOut,
                 token: data.token,
                 resetUser,
+                triggerUpdate,
             }}>
             {children}
         </AuthContext.Provider>
