@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SignupContainer } from "./styles";
-import { useAuth } from "contexts/auth.context";
+import { api } from "services/api";
 
 export const SignUp = () => {
     const [username, setUsername] = useState("");
@@ -9,22 +9,24 @@ export const SignUp = () => {
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
     const [seePwd, setSeePwd] = useState(false);
-    const { signIn } = useAuth();
     
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         setLoading(true);
         event.preventDefault();
-        const response = await signIn({
-            email: username,
-            password
-        });
-        setLoading(false);
         
-        if (!response)
+        // validate fields
+        if (!username || !phone || !password)
         {
             setError(true);
             return;
         }
+        
+        // create user
+        const response = await api.post("/signup", {
+            username,
+            phone,
+            password
+        });
     };
 
     return (
@@ -76,7 +78,7 @@ export const SignUp = () => {
                         </div>
                         {error && (
                             <div className="alert alert-danger" role="alert">
-                                Senha ou email incorretos.
+                                Campos inválidos!
                             </div>
                         )}
                     </div>

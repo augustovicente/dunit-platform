@@ -103,7 +103,7 @@ export const SignupContainer = styled.div`
                     i{
                         position: absolute;
                         right: 20px;
-                        top: 50%;
+                        top: 40%;
                         transform: translateY(-50%);
                         font-size: ${({ theme }) => theme.fontSizes.medium};
                         cursor: pointer;
