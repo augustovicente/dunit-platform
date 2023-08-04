@@ -31,6 +31,7 @@ export const Router = () => {
     return (
         <Suspense fallback={<LoadingPage />}>
             <Routes>
+                <Route index element={<Home />} />
                 <Route path="*" element={<NotFound />} />
                 <Route path="fill-information" element={<FillInformation />} />
                 <Route path="home" element={<Home />} />

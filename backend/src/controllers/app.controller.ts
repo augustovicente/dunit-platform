@@ -4,8 +4,24 @@ import prisma from '../utils/prisma';
 
 class AppController
 {
-    async home(res: Response, next: NextFunction)
+    async home(req: Request, res: Response, next: NextFunction)
     {
+        // check if user has filled the form
+        const has_filled = await prisma.user.findUnique({
+            where: { id: res.locals.payload.id },
+            select: {
+                userInformationEntrepreneur: true,
+                userInformationInvestor: true,
+            }
+        });
+        if (!has_filled?.userInformationEntrepreneur && !has_filled?.userInformationInvestor)
+        {
+            return next({
+                status: StatusCodes.FAILED_DEPENDENCY,
+                message: 'Usuário não preencheu o formulário',
+            });
+        }
+
         const user_id = res.locals.payload.id;
         const user = await prisma.user.findUnique({
             where: { id: user_id },

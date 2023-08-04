@@ -15,7 +15,7 @@ export default (req: Request, res: Response, next: NextFunction) => {
 
     try
     {
-        const data = jwt.verify(token);
+        const data: any = jwt.verify(token);
         res.locals.payload = data;
         return next();
     }
