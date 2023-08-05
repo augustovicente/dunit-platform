@@ -3,6 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import bcrypt from 'bcrypt';
 import prisma from '../utils/prisma';
 import jwt from '../utils/jwt';
+import { transformPropToNumber } from '../utils/formatter';
 
 class LoginController
 {
@@ -149,7 +150,13 @@ class LoginController
 
     async fill_information(req: Request, res: Response, next: NextFunction)
     {
-        const { userTypeId, ...data } = req.body;
+        const {
+            userTypeId,
+            user_name: name,
+            areas,
+            vc_rounds,
+            ...data
+        } = req.body;
 
         if (!userTypeId) {
             return next({
@@ -166,24 +173,30 @@ class LoginController
                     data: {
                         ...data,
                         userId: res.locals.payload.id,
+                        areas: {
+                            connect: areas.map((area: any) => ({ id: area.id })),
+                        },
+                        vcRounds: {
+                            connect: vc_rounds.map((vc_round: any) => ({ id: vc_round.id })),
+                        },
                     },
                 });
                 await prisma.user.update({
                     where: { id: res.locals.payload.id },
-                    data: { userTypeId },
+                    data: { userTypeId, name },
                 });
                 break;
             case 2:
                 // fill the UserInformationEntrepreneur
                 await prisma.userInformationEntrepreneur.create({
                     data: {
-                        ...data,
+                        ...transformPropToNumber(data, 'areaId', 'vc_roundId'),
                         userId: res.locals.payload.id,
                     },
                 });
                 await prisma.user.update({
                     where: { id: res.locals.payload.id },
-                    data: { userTypeId },
+                    data: { userTypeId, name },
                 });
                 break;
         }

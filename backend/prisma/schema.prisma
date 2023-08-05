@@ -39,6 +39,7 @@ model UserInformationInvestor {
 
 model UserInformationEntrepreneur {
     id                  Int      @id @default(autoincrement())
+    company_name        String
     has_received_vc     Boolean @default(false)
     has_been_incubated  Boolean @default(false)
     has_clients         Boolean @default(false)

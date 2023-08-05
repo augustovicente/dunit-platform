@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LoginContainer } from "./styles";
 import { useAuth } from "contexts/auth.context";
-import { ByCapitel } from "components/ByCapitel/ByCapitel";
+import { ByCapitel } from "components/PoweredBy/PoweredBy";
 
 export const ForgotPwd = () => {
     const [username, setUsername] = useState("");

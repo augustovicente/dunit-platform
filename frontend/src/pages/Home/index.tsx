@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { LoginContainer } from "./styles";
 import { useAuth } from "contexts/auth.context";
-import { ByCapitel } from "components/ByCapitel/ByCapitel";
+import { ByCapitel } from "components/PoweredBy/PoweredBy";
 import { api } from "services/api";
 import { useNavigate } from "react-router-dom";
 
