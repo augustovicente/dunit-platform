@@ -14,7 +14,6 @@ const Container = styled.div`
         letter-spacing: 1.85px;
     }
     a {
-        width: 30%;
         color: ${({theme}) => theme.colors.interactivePrimaryAux};
         font-family: ${({theme}) => theme.fontFamily.alternative};
         letter-spacing: 1.85px;
@@ -32,7 +31,7 @@ export const PoweredBy = () => {
         <span>Pwrd by:</span>
         <img src="imgs/dunit-studios.png" alt="Dunit Studios" />
         <a>
-            Conheça nossos outros serviços
+            Conheça nossos<br/> outros serviços
         </a>
     </Container>);
 };

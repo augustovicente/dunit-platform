@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { LoginContainer } from "./styles";
+import { HomeContainer } from "./styles";
 import { useAuth } from "contexts/auth.context";
-import { ByCapitel } from "components/PoweredBy/PoweredBy";
+import { PoweredBy } from "components/PoweredBy/PoweredBy";
 import { api } from "services/api";
 import { useNavigate } from "react-router-dom";
 
@@ -12,8 +12,8 @@ export const Home = () =>
 
     const get_data = async () => {
         try {
-            const res = await api.get('/home');
-            setData(data);
+            const { data: res } = await api.get('/home');
+            setData(res);
         }
         catch (error: any)
         {
@@ -30,6 +30,21 @@ export const Home = () =>
     }, []);
 
     return (
-        <></>
+        <HomeContainer>
+            <div className="header">
+                <img src="" alt="" />
+                <span></span>
+                <span></span>
+            </div>
+            <div className="body">
+                {data.map((item: any) => {
+                    return (<></>);
+                })}
+            </div>
+            <footer>
+                <div></div>
+                <PoweredBy />
+            </footer>
+        </HomeContainer>
     );
 }
