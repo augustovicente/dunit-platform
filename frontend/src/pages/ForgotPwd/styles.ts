@@ -7,7 +7,7 @@ export const ForgotPwdContainer = styled.div`
     width: 100vw;
     align-items: center;
     justify-content: center;
-    img {
+    img.logo {
         position: absolute;
         top: 20px;
         left: 50%;
@@ -157,5 +157,23 @@ export const ForgotPwdContainer = styled.div`
                 }
             }
         }
+    }
+`;
+
+export const SuccessFeedback = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    height: 100%;
+    i {
+        font-size: 90px;
+        color: ${({ theme }) => theme.colors.interactivePrimaryAux};
+    }
+    span {
+        font-family: ${({ theme }) => theme.fontFamily.default};
+        font-size: 18px;
+        color: ${({ theme }) => theme.colors.interactivePrimaryAux};
     }
 `;

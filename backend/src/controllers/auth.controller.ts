@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import prisma from '../utils/prisma';
 import jwt from '../utils/jwt';
 import { transformPropToNumber } from '../utils/formatter';
+import sgMail from '@sendgrid/mail';
 
 class LoginController
 {
@@ -135,15 +136,16 @@ class LoginController
 
         const token = jwt.sign({ id: user.id, email: user.email });
 
-        // TODO: send email with token to user
-        // sendgrid.send({
-        //     to: user.email,
-        //     from: process.env.SENDGRID_FROM_EMAIL,
-        //     subject: 'Recuperação de senha',
-        //     html: `<p>Olá ${user.name},</p>
-        //     <p>Para recuperar sua senha, clique no link abaixo:</p>
-        //     <a href="${process.env.FRONTEND_URL}/reset-password?token=${token}">Recuperar senha</a>`,
-        // });
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY || '');
+        await sgMail.send({
+            from: 'noreply@dunit.io',
+            to: user.email,
+            subject: 'Recuperação de senha',
+            templateId: 'd-244ca9e92aba48afbe4f3f1ae1c17fea',
+            dynamicTemplateData: {
+                verification_url: `${process.env.FRONTEND_URL}/reset-password?token=${token}`,
+            },
+        });
 
         res.status(StatusCodes.OK).json({ message: 'Email enviado com sucesso' });
     }
