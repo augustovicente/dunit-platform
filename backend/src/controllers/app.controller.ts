@@ -116,7 +116,7 @@ class AppController
                 });
         }
 
-        res.status(StatusCodes.OK).json(return_data);
+        res.status(StatusCodes.OK).json({ user_type: user?.userTypeId, items: return_data});
     }
 }
 

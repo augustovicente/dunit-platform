@@ -74,9 +74,10 @@ div.ReactModal__Overlay.ReactModal__Overlay--after-open{
     z-index: 10000;
 }
 /* modal centralizado */
-div.scan-modal{
-    width: 200px;
-    height: 200px;
+div.logout-modal{
+    width: 300px;
+    height: auto;
+    padding: 20px;
     margin:0 auto;
     display:table;
     position: absolute;
