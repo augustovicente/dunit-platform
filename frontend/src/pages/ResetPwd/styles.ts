@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const LoginContainer = styled.div`
+export const ResetPwdContainer = styled.div`
     display: flex;
     background: ${({ theme }) => theme.colors.background};
     height: 100vh;
@@ -130,12 +130,13 @@ export const LoginContainer = styled.div`
                 align-items: center;
                 justify-content: center;
                 gap: 10px;
+                margin-top: 20px;
                 img{
                     height: 20px;
                     width: auto;
                 }
             }
-            div.sign-up {
+            div.login {
                 display: flex;
                 position: absolute;
                 bottom: 20px;
