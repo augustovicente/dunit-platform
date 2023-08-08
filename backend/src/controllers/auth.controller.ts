@@ -176,10 +176,10 @@ class LoginController
                         ...data,
                         userId: res.locals.payload.id,
                         areas: {
-                            connect: areas.map((area: any) => ({ id: area.id })),
+                            connect: areas.map((area: any) => ({ id: +area })),
                         },
-                        vcRounds: {
-                            connect: vc_rounds.map((vc_round: any) => ({ id: vc_round.id })),
+                        vc_rounds: {
+                            connect: vc_rounds.map((vc_round: any) => ({ id: +vc_round })),
                         },
                     },
                 });
