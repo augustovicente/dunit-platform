@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { NotFound } from '../pages/NotFound';
 import { LoadingPage } from 'pages/LoadingPage';
 
+const ResetPwd = lazy(() => import('pages/ResetPwd').then((module) => ({ default: module.ResetPwd })));
 const ForgotPwd = lazy(() => import('pages/ForgotPwd').then((module) => ({ default: module.ForgotPwd })));
 const Login = lazy(() => import('pages/Login').then((module) => ({ default: module.Login })));
 const SignUp = lazy(() => import('pages/SignUp').then((module) => ({ default: module.SignUp })));
@@ -21,6 +22,7 @@ export const Router = () => {
                     <Route path="login" element={<Login />} />
                     <Route path="signup" element={<SignUp />} />
                     <Route path="forgot-pwd" element={<ForgotPwd />} />
+                    <Route path="reset-pwd" element={<ResetPwd />} />
 
                     <Route path="404" element={<NotFound />} />
                 </Routes>

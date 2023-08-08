@@ -1,42 +1,62 @@
 import { useState } from "react";
-import { ResetPwdContainer } from "./styles";
+import { ResetPwdContainer, SuccessFeedback } from "./styles";
+import { api } from "services/api";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import Modal from 'react-modal';
 
 export const ResetPwd = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [error, setError] = useState(false);
+    const [error, setError] = useState({
+        status: false,
+        message: ""
+    });
     const [loading, setLoading] = useState(false);
     const [seePwd, setSeePwd] = useState(false);
     const [seePwdConfirm, setSeePwdConfirm] = useState(false);
+    const [searchParams] = useSearchParams();
+    const [modalOpen, setModalOpen] = useState(false);
+    const navigate = useNavigate();
     
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         setLoading(true);
         event.preventDefault();
-        // const response = await signIn({
-        //     email: username,
-        //     password
-        // });
+        if(password !== confirmPassword)
+        {
+            setError({
+                status: true,
+                message: "As senhas não coincidem."
+            });
+            setLoading(false);
+            return;
+        }
+
+        await api.post("/reset-password", {
+            password,
+            token: searchParams.get("t"),
+        }).catch(() => {
+            setError({
+                status: true,
+                message: 'Erro ao redefinir senha.'
+            });
+        });
+
         setLoading(false);
-        
-        // if (!response)
-        // {
-        //     setError(true);
-        //     return;
-        // }
+        setModalOpen(true);
     };
 
-    return (
+    return (<>
         <ResetPwdContainer>
-            <img src="imgs/dunit.png" alt="" />
+            <img src="imgs/dunit.png" alt="" className="logo" />
             <div className="login-content">
                 <div className="intro">
-                    <span className="intro-title">Recuperar Senha</span>
+                    <span className="intro-title">Redefinir Senha</span>
                     <span className="intro-subtitle">
-                        Digite seu e-mail para enviarmos um link de recuperação de senha.
+                        Digite sua nova senha e confirme
                     </span>
                 </div>
                 <form onSubmit={handleSubmit}>
-                <div className={`form-group ${error ? 'error': ''}`}>
+                    <div className={`form-group ${error.status ? 'error': ''}`}>
                         <label htmlFor="password">Senha</label>
                         <div className="pwd-content">
                             <input
@@ -52,13 +72,8 @@ export const ResetPwd = () => {
                                 <i className="ph ph-eye" onClick={() => setSeePwd(true)}></i>
                             )}
                         </div>
-                        {error && (
-                            <div className="alert alert-danger" role="alert">
-                                Senha ou email incorretos.
-                            </div>
-                        )}
                     </div>
-                    <div className={`form-group ${error ? 'error': ''}`}>
+                    <div className={`form-group ${error.status ? 'error': ''}`}>
                         <label htmlFor="password">Confirmar Senha</label>
                         <div className="pwd-content">
                             <input
@@ -74,9 +89,9 @@ export const ResetPwd = () => {
                                 <i className="ph ph-eye" onClick={() => setSeePwdConfirm(true)}></i>
                             )}
                         </div>
-                        {error && (
+                        {error.status && (
                             <div className="alert alert-danger" role="alert">
-                                Erro ao redefinir senha.
+                                {error.message}
                             </div>
                         )}
                     </div>
@@ -88,5 +103,19 @@ export const ResetPwd = () => {
                 </form>
             </div>
         </ResetPwdContainer>
-    );
+        <Modal
+            shouldCloseOnOverlayClick={true}
+            onRequestClose={() => {
+                setModalOpen(false);
+                navigate('/login', { replace: true });
+            }}
+            isOpen={modalOpen}
+            className={'item-modal'}
+        >
+            <SuccessFeedback>
+                <i className="ph ph-check" />
+                <span>Nova senha salva!</span>
+            </SuccessFeedback>
+        </Modal>
+    </>);
 }

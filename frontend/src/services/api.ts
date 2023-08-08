@@ -6,16 +6,6 @@ export const api = axios.create({
     baseURL: import.meta.env.VITE_APP_API_URL
 });
 
-export const configApi = () => {
-    const token = JSON.parse(localStorage.getItem(`${PREFIX_AUTH}:token`) || '')
-
-    return {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    };
-}
-
 const responseHandler = (response: any) => {
     return response;
 };

@@ -138,12 +138,12 @@ class LoginController
 
         sgMail.setApiKey(process.env.SENDGRID_API_KEY || '');
         await sgMail.send({
-            from: 'noreply@dunit.io',
+            from: 'noreply@mysticker.io',
             to: user.email,
             subject: 'Recuperação de senha',
             templateId: 'd-244ca9e92aba48afbe4f3f1ae1c17fea',
             dynamicTemplateData: {
-                verification_url: `${process.env.FRONTEND_URL}/reset-password?token=${token}`,
+                verification_url: `${process.env.FRONTEND_URL}/reset-pwd?t=${token}`,
             },
         });
 
