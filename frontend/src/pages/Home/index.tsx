@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { CardInvestor } from "./CardInvestor";
 import { CardEntrepreneur } from "./CardEntrepreneur";
 import { useAuth } from "contexts/auth.context";
+import { toast } from "react-toastify";
 
 export const Home = () =>
 {
@@ -31,10 +32,14 @@ export const Home = () =>
         }
         catch (error: any)
         {
-            console.error(error);
             if(error.response.status === 424)
             {
                 navigate('/fill-information', { replace: true });
+            }
+            else
+            {
+                console.error(error);
+                toast.error('Erro ao carregar dados');
             }
         }
     };
@@ -47,22 +52,26 @@ export const Home = () =>
         <HomeContainer>
             <div className="header">
                 <img src="imgs/dunit.png" alt="" />
-                <span>
-                    {data?.user_type === 1 ? 'Investidor ✏' : 'StartUp ✨'}
-                </span>
-                <span>
-                    {data?.user_type === 1 ?
-                        'As StartUps com o perfil para seu investimento:' : 
-                        'Os investidores com o perfil para sua empresa:'
-                    }
-                </span>
+                {data?.user_type && (
+                    <>
+                        <span>
+                            {data?.user_type === 1 ? 'Investidor ✏' : 'StartUp ✨'}
+                        </span>
+                        <span>
+                            {data?.user_type === 1 ?
+                                'As StartUps com o perfil para seu investimento:' : 
+                                'Os investidores com o perfil para sua empresa:'
+                            }
+                        </span>
+                    </>
+                )}
             </div>
             <div className="body">
-                {data?.items?.map((item: any) => {
+                {data?.items?.map((item: any, index: number) => {
                     return data.user_type === 1 ? (
-                        <CardInvestor data={item} />
+                        <CardEntrepreneur data={item} key={'card-'+index} />
                     ) : (
-                        <CardEntrepreneur data={item} />
+                        <CardInvestor data={item} key={'card-'+index} />
                     );
                 })}
             </div>

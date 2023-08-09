@@ -68,6 +68,7 @@ class AppController
                         wpp: true,
                         target_equity: true,
                         target_value: true,
+                        company_name: true,
                     },
                 });
 

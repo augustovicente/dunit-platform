@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 export const HomeContainer = styled.div`
     display: flex;
     background-color: ${({ theme }) => theme.colors.white};
-    min-height: 100vh;
+    min-height: calc(100vh - 50px);;
     height: auto;
     width: 100vw;
     align-items: center;
@@ -34,7 +34,11 @@ export const HomeContainer = styled.div`
         }
     }
     div.body {
+        padding-top: 20px;
         display: flex;
+        width: 90%;
+        max-width: 90%;
+        overflow: hidden;
     }
     footer {
         margin-top: auto;

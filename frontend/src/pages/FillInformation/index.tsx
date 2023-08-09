@@ -5,6 +5,7 @@ import { InvestorInfo } from "./InvestorInfo";
 import { PoweredBy } from "components/PoweredBy/PoweredBy";
 import { api } from "services/api";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const FillInformation = () => {
     const [step, setStep] = useState(1);
@@ -27,6 +28,7 @@ export const FillInformation = () => {
         // send data
         await api.post('/fill-information', data).catch((err) => {
             console.error(err);
+            toast.error('Erro ao enviar dados');
         });
         navigate('/home', { replace: true });
         setLoading(false);
