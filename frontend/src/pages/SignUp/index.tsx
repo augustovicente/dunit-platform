@@ -49,7 +49,7 @@ export const SignUp = () => {
 
     return (
         <SignupContainer>
-            <img src="imgs/dunit.png" alt="" />
+            <img src="imgs/dunit.png" alt="" className="logo" />
             <div className="login-content">
                 <div className="intro">
                     <span className="intro-title">Crie sua conta</span>

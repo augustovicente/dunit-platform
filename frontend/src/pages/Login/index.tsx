@@ -28,7 +28,7 @@ export const Login = () => {
 
     return (
         <LoginContainer>
-            <img src="imgs/dunit.png" alt="" />
+            <img src="imgs/dunit.png" alt="" className="logo" />
             <div className="login-content">
                 <div className="intro">
                     <span className="intro-title">Bem vindx! 👋</span>

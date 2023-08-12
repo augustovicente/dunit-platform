@@ -2,16 +2,18 @@ import { styled } from "styled-components";
 
 export const SignupContainer = styled.div`
     display: flex;
-    background: ${({ theme }) => theme.colors.background};
-    height: 100vh;
-    width: 100vw;
+    background-color: ${({ theme }) => theme.colors.background};
+    min-height: 100vh;
+    width: calc(100vw - 32px);
     align-items: center;
     justify-content: center;
-    img {
-        position: absolute;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 16px;
+    img.logo {
+        display: flex;
+        margin: 0 auto;
+        margin-top: 20px;
     }
     div.login-content{
         z-index: 1;
@@ -21,7 +23,7 @@ export const SignupContainer = styled.div`
         flex-direction: column;
         gap: 40px;
         width: 100%;
-        padding: 0 16px;
+        margin: auto 0;
         div.intro{
             display: flex;
             flex-direction: column;
@@ -124,7 +126,7 @@ export const SignupContainer = styled.div`
                 }
                 &.error{
                     input.form-control{
-                        border: 2px solid ${({ theme }) => theme.colors.yellow};
+                        border: 2px solid ${({ theme }) => theme.colors.red};
                     }
                 }
             }
@@ -149,12 +151,12 @@ export const SignupContainer = styled.div`
             }
             div.login {
                 display: flex;
-                position: absolute;
-                bottom: 20px;
+                background-color: ${({ theme }) => theme.colors.background};
                 width: 100%;
                 justify-content: center;
                 gap: 5px;
                 align-items: center;
+                margin-bottom: 20px;
                 span {
                     font-family: ${({ theme }) => theme.fontFamily.default};
                     font-size: ${({ theme }) => theme.fontSizes.normal};
