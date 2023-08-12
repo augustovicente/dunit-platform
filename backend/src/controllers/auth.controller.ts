@@ -138,7 +138,7 @@ class LoginController
 
         sgMail.setApiKey(process.env.SENDGRID_API_KEY || '');
         await sgMail.send({
-            from: 'noreply@mysticker.io',
+            from: 'noreply@dunitstudio.com',
             to: user.email,
             subject: 'Recuperação de senha',
             templateId: 'd-244ca9e92aba48afbe4f3f1ae1c17fea',
