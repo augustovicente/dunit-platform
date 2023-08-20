@@ -2,6 +2,7 @@ import { TextInput } from "components/TextInput";
 import { FormContainer } from "../styles";
 import { useEffect, useState } from "react";
 import Form from 'react-bootstrap/Form';
+import { phoneFormatter } from "utils/helpers";
 
 type dataReturn = {
     company_name: string;
@@ -48,21 +49,32 @@ export const EntrepreneurInfo = ({loading, onSubmit, goBack}: EntrepreneurInfoPr
         console.log(data);
         
         if (
-            data.company_name &&
-            data.user_name &&
-            data.areaId &&
+            data.company_name.length &&
+            data.user_name.length &&
+            data.areaId !== undefined &&
+            data.areaId.toString().length &&
             data.has_received_vc !== undefined &&
+            data.has_received_vc.toString().length &&
             data.has_been_incubated !== undefined &&
+            data.has_been_incubated.toString().length &&
             data.has_clients !== undefined &&
-            data.vc_roundId &&
-            data.target_value &&
-            data.target_equity &&
-            data.wpp &&
-            data.linkedin &&
-            data.has_accepted_terms &&
-            data.has_accepted_terms2
+            data.has_clients.toString().length &&
+            data.vc_roundId !== undefined &&
+            data.vc_roundId.toString().length &&
+            data.target_value !== undefined &&
+            data.target_value.toString().length &&
+            data.target_equity !== undefined &&
+            data.target_equity.toString().length &&
+            data.wpp.length &&
+            data.wpp.length  === 15 &&
+            data.linkedin.length &&
+            data.has_accepted_terms === true &&
+            data.has_accepted_terms2 === true
         ) {
             setIsEnabled(true);
+        }else {
+            setIsEnabled(false);
+
         }
     }, [data]);
 
@@ -154,7 +166,9 @@ export const EntrepreneurInfo = ({loading, onSubmit, goBack}: EntrepreneurInfoPr
                 <i className="ph ph-whatsapp-logo" />
                 <TextInput
                     placeholder="Ex: 5511999999999"
-                    value={data.wpp}
+                    minLength={15}
+                    maxLength={15}
+                    value={data.wpp.length ? phoneFormatter(data.wpp) : data.wpp}
                     onChange={(e) => setData({...data, wpp: e.target.value})}
                 />
             </div>

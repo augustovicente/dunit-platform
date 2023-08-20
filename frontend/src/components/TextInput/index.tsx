@@ -16,13 +16,17 @@ type TextInputProps = {
     placeholder?: string;
     value?: string | number;
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    maxLength?: number,
+    minLength?: number,
 };
 
-export const TextInput = ({type = 'text', onChange, placeholder, value}: TextInputProps) => {
+export const TextInput = ({type = 'text', onChange, placeholder, value, maxLength, minLength}: TextInputProps) => {
     return <CustomInput
         type={type}
         placeholder={placeholder}
         onChange={onChange}
         value={value}
+        maxLength={maxLength}
+        minLength={minLength}
     />;
 };

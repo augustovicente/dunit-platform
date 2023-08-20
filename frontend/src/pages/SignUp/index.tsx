@@ -4,6 +4,7 @@ import { api } from "services/api";
 import { PREFIX_AUTH } from "utils/constants";
 import { useAuth } from "contexts/auth.context";
 import { useNavigate } from "react-router-dom";
+import { phoneFormatter, validateEmail } from "utils/helpers";
 
 export const SignUp = () => {
     const [username, setUsername] = useState("");
@@ -18,10 +19,22 @@ export const SignUp = () => {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         setLoading(true);
         event.preventDefault();
-        
+
         // validate fields
         if (!username || !phone || !password)
         {
+            setError(true);
+            return;
+        }
+
+        // validate email
+        if(!validateEmail(username)) {
+            setError(true);
+            return;
+        }
+
+        // validate phone
+        if(phone.length < 11) {
             setError(true);
             return;
         }
@@ -59,10 +72,11 @@ export const SignUp = () => {
                     <div className={`form-group ${error ? 'error': ''}`}>
                         <label htmlFor="username">E-mail</label>
                         <input
-                            type="text"
+                            type="email"
                             className="form-control"
                             id="username"
                             value={username}
+                            required
                             onChange={(e) => setUsername(e.target.value)}
                         />
                     </div>
@@ -71,9 +85,12 @@ export const SignUp = () => {
                         <div className="form-control">
                             <span>+55</span>
                             <input
-                                type="number"
+                                type="text"
                                 id="phone"
-                                value={phone}
+                                value={phone.length > 0 ? phoneFormatter(phone) : phone}
+                                minLength={15}
+                                maxLength={15}
+                                required
                                 onChange={(e) => setPhone(e.target.value)}
                             />
                         </div>
@@ -86,6 +103,7 @@ export const SignUp = () => {
                                 className="form-control"
                                 id="password"
                                 value={password}
+                                minLength={6}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                             {seePwd ? (

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { LoginContainer } from "./styles";
 import { useAuth } from "contexts/auth.context";
+import { validateEmail } from "utils/helpers";
 
 export const Login = () => {
     const [username, setUsername] = useState("");
@@ -13,6 +14,13 @@ export const Login = () => {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         setLoading(true);
         event.preventDefault();
+
+        //Validador de E-mail
+        if(!validateEmail(username)) {
+            setError(true);
+            return;
+        }
+
         const response = await signIn({
             email: username,
             password
@@ -38,7 +46,7 @@ export const Login = () => {
                     <div className={`form-group ${error ? 'error': ''}`}>
                         <label htmlFor="username">E-mail</label>
                         <input
-                            type="text"
+                            type="email"
                             className="form-control"
                             id="username"
                             value={username}

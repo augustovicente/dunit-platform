@@ -1,5 +1,10 @@
 import { FormEvent } from "react";
 
+export function validateEmail(email: string) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+  }
+
 export const maskCPF = (e: FormEvent<HTMLInputElement>) => {
     e.currentTarget.maxLength = 14;
     let value = e.currentTarget.value;
@@ -51,7 +56,7 @@ export const maskCEP = (e: FormEvent<HTMLInputElement>) => {
  * formatPhone('4399999999') => (43) 99999-9999
  */
 export const phoneFormatter = (value: string) => {
-    if (value.length === 13) {
+    if (value.length === 16) {
         value = value.substring(2);
     }
 

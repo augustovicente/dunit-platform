@@ -2,6 +2,7 @@ import { TextInput } from "components/TextInput";
 import { FormContainer } from "../styles";
 import { useEffect, useState } from "react";
 import Form from 'react-bootstrap/Form';
+import { phoneFormatter } from "utils/helpers";
 
 type dataReturn = {
     user_name: string;
@@ -47,17 +48,23 @@ export const InvestorInfo = ({loading, onSubmit, goBack}: InvestorInfoProps) => 
     };
 
     useEffect(() => {
+        console.log(data);
+
         if (
-            data.user_name &&
-            (data.represent_fund ? data.vc_fund : true) &&
-            data.areas &&
-            data.vc_rounds &&
-            data.wpp &&
-            data.linkedin &&
-            data.has_accepted_terms &&
-            data.has_accepted_terms2
+            data.user_name.length &&
+            (data.represent_fund ? data.vc_fund.length : true) &&
+            data.areas.length > 0 &&
+            data.vc_rounds.length > 0&&
+            data.wpp.length &&
+            data.wpp.length  === 15 &&
+            data.linkedin.length &&
+            data.has_accepted_terms === true &&
+            data.has_accepted_terms2 === true
         ) {
             setIsEnabled(true);
+        } else {
+            setIsEnabled(false);
+
         }
     }, [data]);
 
@@ -149,7 +156,9 @@ export const InvestorInfo = ({loading, onSubmit, goBack}: InvestorInfoProps) => 
                 <i className="ph ph-whatsapp-logo" />
                 <TextInput
                     placeholder="Ex: 5511999999999"
-                    value={data.wpp}
+                    minLength={15}
+                    maxLength={15}
+                    value={data.wpp.length ? phoneFormatter(data.wpp) : data.wpp}
                     onChange={(e) => setData({...data, wpp: e.target.value})}
                 />
             </div>
